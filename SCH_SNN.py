@@ -36,8 +36,8 @@ noise_tau = 10*ms
 
 #Simulation
 defaultclock.dt = 0.01* ms #timestep
-layer_number = 50 #number of layers
-layer_size = 60 #neurons present in each layer
+layer_number = 120 #number of layers
+layer_size = 25 #neurons present in each layer
 
 eqs = """
 dvm/dt = ((EL - vm) + DeltaT*exp((vm - VT)/DeltaT) + I/gL - w/gL + stimul/gL+g)/tau + noise_std*sqrt(1/noise_tau)* xi : volt #AdEx
@@ -64,9 +64,9 @@ S.connect(j='k for k in range((int(i/layer_size)+1)*layer_size, (int(i/layer_siz
 
 #Uncomment the following line, if you want to test noise in the weights. Also
 #comment the line distribution = 0.
-# weight_noise = - 0.28*1* np.random.binomial(n=1, p=0.1, size=[176400])
+# weight_noise = - 0.3*1* np.random.binomial(n=1, p=0.1, size=[74375])
 weight_noise = 0
-S.w_syn[:] = 0.6 *mV + weight_noise * mV
+S.w_syn[:] = 1.4 *mV + weight_noise * mV
 
 trace = StateMonitor(neuron, 'vm', record=True)
 spikes = SpikeMonitor(neuron)
@@ -77,7 +77,7 @@ run(1* ms)
 neuron.I[:layer_size] = 12*nA #input given to the first layer
 run(1*ms)
 neuron.I =0
-run(300 * ms)
+run(349 * ms)
 
 plot_raster(spikes.i, spikes.t)
 plt.show()

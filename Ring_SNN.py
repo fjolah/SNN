@@ -78,8 +78,8 @@ S.connect()
 
 #Uncomment the following line, if you want to test noise in the weights. Also
 #comment the line distribution = 0.
-weight_noise = -.28*np.max(J)* np.random.binomial(n=1, p=1, size=[9000000])
-#weight_noise = 0
+#weight_noise = -.3*np.max(J)* np.random.binomial(n=1, p=1, size=[9000000])
+weight_noise = 0
 S.w_syn = weight =  (J.T).flatten()* mV + weight_noise*mV 
 
 trace = StateMonitor(neuron, variables = True,  record=True) 
